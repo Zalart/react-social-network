@@ -1,0 +1,11 @@
+.navigation {
+    grid-area: n;
+    background-color: lightgreen;
+    }
+    .navigation ul {
+    list-style-type: none;
+    }
+    
+.item {
+    color: white;
+    }

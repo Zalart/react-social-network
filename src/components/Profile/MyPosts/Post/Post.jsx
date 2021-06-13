@@ -1,11 +1,11 @@
 import styles from "./Post.module.css";
 
-const Post = (props) => {
+const Post = ({message, likes}) => {
     return (  
        <div className={styles.item}>
          <img src="https://randomuser.me/api/portraits/women/68.jpg" />
-         {props.message}
-       <div><span>likes: {props.likes}</span></div></div>
+         {message}
+       <div><span>likes: {likes}</span></div></div>
     )
 }
 export default Post;

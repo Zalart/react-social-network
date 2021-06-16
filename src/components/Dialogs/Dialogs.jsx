@@ -3,11 +3,11 @@ import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 
 
-const Dialogs = ({dialogs, messages}) => {
+const Dialogs = ({state}) => {
     
 
-    const dialogsElements = dialogs.map(dialog=> <Dialog name={dialog.name} id={dialog.id} />);
-    const messagesElements = messages.map(m => <Message message={m.message} />)
+    const dialogsElements = state.dialogs.map(d=> <Dialog name={d.name} id={d.id} photo={d.photo}/>);
+    const messagesElements = state.messages.map(m => <Message message={m.message} type={m.type}/>)
 
     return (
         <div className={styles.dialogs}>

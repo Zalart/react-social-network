@@ -1,8 +1,9 @@
 import styles from "./Message.module.css";
 
-const Message = (props) => {
+const Message = ({type, message}) => {
+    
     return (
-<div className={styles.message}>{props.message}</div>
+<div className={styles.message + ' ' + styles[type]}>{message}</div>
     )
 }
 

@@ -1,10 +1,11 @@
 import {NavLink} from "react-router-dom";
 import styles from "./Dialog.module.css";
-const Dialog = (props) => {
+const Dialog = ({id, name, photo}) => {
     return (
-<div className={styles.dialog + ' ' + styles.active}>
-                    <NavLink to={`/dialogs/${props.id}`}>{props.name}</NavLink>
-                    </div>
+
+    
+                    <NavLink to={`/dialogs/${id}`} activeClassName={styles.active} className={styles.dialog}><img src={photo} alt={name} />{name}</NavLink>
+                    
     )
 }
 

@@ -1,0 +1,9 @@
+.sidebar {
+    grid-area: n;
+    background-color: lightgreen;
+    padding: 20px;
+    }
+
+.sidebar ul {
+    list-style-type: none;
+    }

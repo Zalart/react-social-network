@@ -1,0 +1,12 @@
+.title {
+font-size: 2em;
+}
+
+.friends {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    gap: 5px;
+    margin-top: 30px;
+}
+

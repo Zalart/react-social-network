@@ -1,15 +1,25 @@
+import React from 'react';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
-const MyPosts = ({posts}) => {
-  console.log('here', posts)
-  const postsElements = posts.map(post => (<Post message={post.message} likes={post.likes} />))
+const MyPosts = ({posts, addPost}) => {
+
+  const postsElements = posts.map(post => (<Post key={post.message} message={post.message} likes={post.likes} />));
+
+  let newPostElement = React.createRef();
+
+  const handleAddPost = () => {
+    let postMessage = newPostElement.current.value;
+    addPost(postMessage);
+    newPostElement.current.value = '';   
+  
+  }
     return (  
       <div className={styles.postsBlock}>
         <h2>MY POSTS</h2>
         <div>
-          <div><textarea></textarea></div>
-          <button>Add post</button>
+          <div><textarea ref={newPostElement}></textarea></div>
+          <button onClick={handleAddPost}>Add post</button>
         <button>Remove</button></div>
       
       <div className={styles.posts}>

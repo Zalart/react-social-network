@@ -9,7 +9,7 @@ import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 
 
-const App = ({state}) => {
+const App = ({state, addPost}) => {
   const {dialogsPage, profilePage, friendsBlock} = state;
   return (<div className="app-wrapper">
     <BrowserRouter>
@@ -18,7 +18,7 @@ const App = ({state}) => {
    <div className="app-wrapper-content">
      
      <Route path="/dialogs" ><Dialogs state={dialogsPage}  /></Route>
-     <Route path="/profile"><Profile state={profilePage} /> </Route>
+     <Route path="/profile"><Profile state={profilePage} addPost={addPost} /> </Route>
      <Route path="/music" component={Music} />
      <Route path="/news" component={News} />
      <Route path="/settings" component={Settings} />

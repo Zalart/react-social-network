@@ -1,11 +1,14 @@
-import {rerenderEntireTree} from './../render';
+let rerenderEntireTree = ()=> {
+  console.log('state is changed');
+}
 export const state = {
   profilePage: {
     posts: [
       {id: 1, likes: 20, message: 'Hi, how are you?'},
       {id: 2, likes: 100, message: 'It\'s my first post'},
       {id: 3, likes: 0, message: 'New message from props'}
-    ]
+    ],
+    postMessage: ''
   },
  dialogsPage: {
     messages: [
@@ -13,6 +16,7 @@ export const state = {
       {id: 2, message: 'Do you feel good?', type: 'out'},
       {id: 3, message: 'I\'m okay', type: 'in'}
     ],
+    currentMessage: '',
     dialogs: [
       {id: 1, name: 'Artur', photo: 'https://randomuser.me/api/portraits/men/61.jpg' },
       {id: 2, name: 'Ivan', photo: 'https://randomuser.me/api/portraits/women/89.jpg' },
@@ -32,13 +36,41 @@ export const state = {
 
 }
 
-export const addPost = (post) => {
+
+export const addPost = () => {
   const newPost = {
     id: state.profilePage.posts.length + 1, 
     likes: 0, 
-    message: post
+    message: state.profilePage.postMessage
   }
   state.profilePage.posts.push(newPost);
+  state.profilePage.postMessage = '';
+
   rerenderEntireTree(state);
   
 }
+
+export const changePost = (post) => {
+  state.profilePage.postMessage = post;
+  rerenderEntireTree(state);
+}
+
+export const addMessage = (type) => {
+  const newMessage = {
+    id: state.dialogsPage.messages.length + 1, message: state.dialogsPage.currentMessage, type: type
+  }
+  state.dialogsPage.messages.push(newMessage);
+  state.dialogsPage.currentMessage = '';
+  rerenderEntireTree(state);
+}
+
+export const changeMessage = (message) => {
+  state.dialogsPage.currentMessage = message;
+  rerenderEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer;
+}
+window.state = state;
+

@@ -9,6 +9,7 @@ const messageText = React.createRef();
 
 const handleAddMessage = () => {
     if(dialogsPage.currentMessage !== '')  {
+        debugger;
         addMessage('out');
     }
 }

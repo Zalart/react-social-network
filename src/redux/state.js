@@ -1,7 +1,6 @@
-let rerenderEntireTree = ()=> {
-  console.log('state is changed');
-}
-export const state = {
+
+const store = {
+  _state: {
   profilePage: {
     posts: [
       {id: 1, likes: 20, message: 'Hi, how are you?'},
@@ -33,44 +32,53 @@ export const state = {
     {id: 4, name: 'Arnold', photo: 'https://randomuser.me/api/portraits/men/78.jpg'}
   ]
   }
+  },
 
-}
-
-
-export const addPost = () => {
+  subscribe(observer){
+    this._callSubscriber = observer;
+},
+_callSubscriber(){
+  console.log('no subscribers (observers)')
+},
+getState() {
+  return this._state;
+},
+setState(state){
+ this._state = state;
+},
+  addPost () {
   const newPost = {
-    id: state.profilePage.posts.length + 1, 
+    id: this._state.profilePage.posts.length + 1, 
     likes: 0, 
-    message: state.profilePage.postMessage
+    message: this._state.profilePage.postMessage
   }
-  state.profilePage.posts.push(newPost);
-  state.profilePage.postMessage = '';
+  this._state.profilePage.posts.push(newPost);
+  this._state.profilePage.postMessage = '';
+  this._callSubscriber(this._state);
 
-  rerenderEntireTree(state);
-  
-}
-
-export const changePost = (post) => {
-  state.profilePage.postMessage = post;
-  rerenderEntireTree(state);
-}
-
-export const addMessage = (type) => {
+  //rerenderEntireTree(state);
+},
+changePost(post) {
+  this._state.profilePage.postMessage = post;
+  this._callSubscriber(this._state);
+  //rerenderEntireTree(state);
+},
+addMessage(type) {
   const newMessage = {
-    id: state.dialogsPage.messages.length + 1, message: state.dialogsPage.currentMessage, type: type
+    id: this._state.dialogsPage.messages.length + 1, message: this._state.dialogsPage.currentMessage, type: type
   }
-  state.dialogsPage.messages.push(newMessage);
-  state.dialogsPage.currentMessage = '';
-  rerenderEntireTree(state);
+  this._state.dialogsPage.messages.push(newMessage);
+  this._state.dialogsPage.currentMessage = '';
+  this._callSubscriber(this._state);
+  //rerenderEntireTree(state);
+},
+changeMessage(message) {
+  this._state.dialogsPage.currentMessage = message;
+  this._callSubscriber(this._state);
+  //rerenderEntireTree(state);
 }
 
-export const changeMessage = (message) => {
-  state.dialogsPage.currentMessage = message;
-  rerenderEntireTree(state);
 }
 
-export const subscribe = (observer) => {
-  rerenderEntireTree = observer;
-}
-window.state = state;
-
+export default store;
+window.store = store;

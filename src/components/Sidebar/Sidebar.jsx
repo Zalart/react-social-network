@@ -1,11 +1,11 @@
 import styles from "./Sidebar.module.css";
 import Navigation from "./Navigation/Navigation";
 import FriendsBlock from "./FriendsBlock/FriendsBlock";
-const Sidebar = ({state}) => {
+const Sidebar = (props) => {
     return (
 <div className={styles.sidebar}>
 <Navigation />
-<FriendsBlock friends={state.friends} />
+<FriendsBlock friendsBlock={props.friendsBlock} />
    </div>
     )
 }

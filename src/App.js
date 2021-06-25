@@ -9,16 +9,16 @@ import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 
 
-const App = ({state, addPost, changePost, addMessage, changeMessage}) => {
-  const {dialogsPage, profilePage, friendsBlock} = state;
+const App = ({state, store}) => {
+
   return (<div className="app-wrapper">
     <BrowserRouter>
    <Header />
-   <Sidebar state={friendsBlock} />
+   <Sidebar friendsBlock={state.friendsBlock} />
    <div className="app-wrapper-content">
      
-     <Route path="/dialogs" ><Dialogs dialogsPage={dialogsPage} addMessage={addMessage} changeMessage={changeMessage} /></Route>
-     <Route path="/profile"><Profile profilePage={profilePage} addPost={addPost} changePost={changePost} /> </Route>
+     <Route path="/dialogs" ><Dialogs dialogsPage={state.dialogsPage} addMessage={store.addMessage.bind(store)} changeMessage={store.changeMessage.bind(store)} /></Route>
+     <Route path="/profile"><Profile profilePage={state.profilePage} addPost={store.addPost.bind(store)} changePost={store.changePost.bind(store)} /> </Route>
      <Route path="/music" component={Music} />
      <Route path="/news" component={News} />
      <Route path="/settings" component={Settings} />
@@ -29,7 +29,5 @@ const App = ({state, addPost, changePost, addMessage, changeMessage}) => {
     
   );
 }
-
-
 
 export default App;

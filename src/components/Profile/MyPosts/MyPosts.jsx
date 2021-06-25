@@ -2,18 +2,18 @@ import React from 'react';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
-const MyPosts = ({posts, currentPost, addPost, changePost}) => {
+const MyPosts = ({posts, currentPost, dispatch}) => {
 
   const postsElements = posts.map(post => (<Post key={post.message} message={post.message} likes={post.likes} />));
 
   let newPostElement = React.createRef();
 
   const handleAddPost = () => {
-    addPost();
+    dispatch({type: 'ADD-POST'});
  
   }
   const handleChangePost = () => {
-    changePost(newPostElement.current.value);
+    dispatch({type: 'CHANGE-POST', post: newPostElement.current.value});
   }
     return (  
       <div className={styles.postsBlock}>

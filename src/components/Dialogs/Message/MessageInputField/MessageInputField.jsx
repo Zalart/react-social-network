@@ -3,19 +3,20 @@ import styles from "./MessageInputField.module.css";
 
 
 
-const MessageInputField = ({dialogsPage, addMessage, changeMessage})=> {
+const MessageInputField = ({dialogsPage, dispatch})=> {
 
 const messageText = React.createRef();
 
 const handleAddMessage = () => {
+    const direction = Math.random() >= 0.5 ? 'out' : 'in';
     if(dialogsPage.currentMessage !== '')  {
-        debugger;
-        addMessage('out');
+        
+        dispatch({type: 'ADD-MESSAGE', direction: direction});
     }
 }
 
 const handleChangeMessage = () => {
-    changeMessage(messageText.current.value);
+    dispatch({type: 'CHANGE-MESSAGE', message: messageText.current.value});
 }
 
     return (

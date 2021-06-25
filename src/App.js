@@ -17,8 +17,8 @@ const App = ({state, store}) => {
    <Sidebar friendsBlock={state.friendsBlock} />
    <div className="app-wrapper-content">
      
-     <Route path="/dialogs" ><Dialogs dialogsPage={state.dialogsPage} addMessage={store.addMessage.bind(store)} changeMessage={store.changeMessage.bind(store)} /></Route>
-     <Route path="/profile"><Profile profilePage={state.profilePage} addPost={store.addPost.bind(store)} changePost={store.changePost.bind(store)} /> </Route>
+     <Route path="/dialogs" ><Dialogs dialogsPage={state.dialogsPage} dispatch={store.dispatch.bind(store)} /></Route>
+     <Route path="/profile"><Profile profilePage={state.profilePage} dispatch={store.dispatch.bind(store)} /> </Route>
      <Route path="/music" component={Music} />
      <Route path="/news" component={News} />
      <Route path="/settings" component={Settings} />

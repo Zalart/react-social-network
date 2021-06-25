@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 import MessageInputField from "./Message/MessageInputField/MessageInputField";
 
 
-const Dialogs = ({dialogsPage, addMessage, changeMessage}) => {
+const Dialogs = ({dialogsPage, dispatch}) => {
     
 
     const dialogsElements = dialogsPage.dialogs.map(d => <Dialog name={d.name} id={d.id} photo={d.photo}/>);
@@ -22,7 +22,7 @@ const Dialogs = ({dialogsPage, addMessage, changeMessage}) => {
             <div className={styles.messages}>
             { messagesElements }
             </div>
-        <MessageInputField dialogsPage={dialogsPage} addMessage={addMessage} changeMessage={changeMessage} />
+        <MessageInputField dialogsPage={dialogsPage} dispatch={dispatch} />
 
         </div>
         

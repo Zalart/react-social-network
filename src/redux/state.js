@@ -1,3 +1,6 @@
+import { friendsBlockReducer } from "./friendsBlockReducer";
+import { dialogsPageReducer, ADD_MESSAGE, CHANGE_MESSAGE } from "./dialogsPageReducer";
+import { profilePageReducer, ADD_POST, CHANGE_POST } from "./profilePageReducer";
 
 const store = {
   _state: {
@@ -81,43 +84,26 @@ changeMessage(message) {
  */
 dispatch(action) { // {type: 'ADD-POST'}
 
-  switch (action.type) {
-  case "ADD-POST": 
-  const newPost = {
-    id: this._state.profilePage.posts.length + 1, 
-    likes: 0, 
-    message: this._state.profilePage.postMessage
-  }
-  this._state.profilePage.posts.push(newPost);
-  this._state.profilePage.postMessage = '';
+  this._state.profilePage = profilePageReducer(this._state.profilePage, action);
+  this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage, action);
+  this._state.friendsBlock = friendsBlockReducer(this._state.friendsBlock, action);
+  
   this._callSubscriber(this._state);
-    break;
-
-    case "CHANGE-POST": 
-    this._state.profilePage.postMessage = action.post;
-    this._callSubscriber(this._state);
-      break;
-
-    case "ADD-MESSAGE": 
-    const newMessage = {
-      id: this._state.dialogsPage.messages.length + 1, message: this._state.dialogsPage.currentMessage, type: action.direction
-    }
-    this._state.dialogsPage.messages.push(newMessage);
-    this._state.dialogsPage.currentMessage = '';
-    this._callSubscriber(this._state);
-      break;
-
-      case "CHANGE-MESSAGE": 
-      this._state.dialogsPage.currentMessage = action.message;
-      this._callSubscriber(this._state);
-        break;
-
-  default:
-    break;
-}
 }
 
 }
+
+export const addMessageActionCreator = ()=> {
+  const direction = Math.random() >= 0.5 ? 'out' : 'in';
+ return {type: ADD_MESSAGE, direction: direction}
+
+}
+
+export const changeNewMessageActionCreator = (message) => ({type: CHANGE_MESSAGE, message: message});
+
+export const addPostActionCreator = () => ({ type: ADD_POST });
+
+export const changeNewPostTextActionCreator = (post) => ({type: CHANGE_POST, post: post});
 
 export default store;
 window.store = store;

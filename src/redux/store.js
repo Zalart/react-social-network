@@ -1,6 +1,6 @@
 import { friendsBlockReducer } from "./friendsBlockReducer";
-import { dialogsPageReducer, ADD_MESSAGE, CHANGE_MESSAGE } from "./dialogsPageReducer";
-import { profilePageReducer, ADD_POST, CHANGE_POST } from "./profilePageReducer";
+import { dialogsPageReducer } from "./dialogsPageReducer";
+import { profilePageReducer } from "./profilePageReducer";
 
 const store = {
   _state: {
@@ -92,18 +92,6 @@ dispatch(action) { // {type: 'ADD-POST'}
 }
 
 }
-
-export const addMessageActionCreator = ()=> {
-  const direction = Math.random() >= 0.5 ? 'out' : 'in';
- return {type: ADD_MESSAGE, direction: direction}
-
-}
-
-export const changeNewMessageActionCreator = (message) => ({type: CHANGE_MESSAGE, message: message});
-
-export const addPostActionCreator = () => ({ type: ADD_POST });
-
-export const changeNewPostTextActionCreator = (post) => ({type: CHANGE_POST, post: post});
 
 export default store;
 window.store = store;

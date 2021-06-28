@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./MessageInputField.module.css";
-import { addMessageActionCreator, changeNewMessageActionCreator } from '../../../../redux/state';
+import { addMessageActionCreator, changeNewMessageActionCreator } from '../../../../redux/dialogsPageReducer';
 
 
 const MessageInputField = ({dialogsPage, dispatch})=> {

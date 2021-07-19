@@ -2,14 +2,14 @@ import React from 'react';
 import styles from "./Dialogs.module.css";
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
-import MessageInputField from "./Message/MessageInputField/MessageInputField";
+import MessageInputFieldContainer from "./Message/MessageInputField/MessageInputFieldContainer";
 
 
-const Dialogs = ({dialogsPage, dispatch}) => {
+const Dialogs = ({store}) => {
     
 
-    const dialogsElements = dialogsPage.dialogs.map(d => <Dialog name={d.name} id={d.id} photo={d.photo}/>);
-    const messagesElements = dialogsPage.messages.map(m => <Message message={m.message} type={m.type}/>);
+    const dialogsElements = store.getState().dialogsPage.dialogs.map(d => <Dialog name={d.name} id={d.id} photo={d.photo}/>);
+    const messagesElements = store.getState().dialogsPage.messages.map(m => <Message message={m.message} type={m.type}/>);
 
 
     return (
@@ -22,7 +22,7 @@ const Dialogs = ({dialogsPage, dispatch}) => {
             <div className={styles.messages}>
             { messagesElements }
             </div>
-        <MessageInputField dialogsPage={dialogsPage} dispatch={dispatch} />
+        <MessageInputFieldContainer store={store} />
 
         </div>
         

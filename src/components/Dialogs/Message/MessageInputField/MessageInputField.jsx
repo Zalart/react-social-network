@@ -1,30 +1,27 @@
 import React from 'react';
 import styles from "./MessageInputField.module.css";
-import { addMessageActionCreator, changeNewMessageActionCreator } from '../../../../redux/dialogsPageReducer';
 
 
-const MessageInputField = ({dialogsPage, dispatch})=> {
+
+const MessageInputField = ({currentMessage, handleAddMessage, handleChangeMessage})=> {
 
 
-const handleAddMessage = () => {
-    if(dialogsPage.currentMessage !== '')  {
-        
-        dispatch(addMessageActionCreator());
-    }
+const onAddMessage = () => {
+    handleAddMessage();
 }
 
-const handleChangeMessage = (e) => {
+const onChangeMessage = (e) => {
 
-    dispatch(changeNewMessageActionCreator(e.target.value));
+    handleChangeMessage(e.target.value);
 }
 
     return (
         <>
         <div className={styles.addMessage}>
-        <textarea placeholder="type here"  onChange={handleChangeMessage} value={dialogsPage.currentMessage}></textarea>
+        <textarea placeholder="type here"  onChange={onChangeMessage} value={currentMessage}></textarea>
         
     </div>
-    <div className={styles.buttonWrapper}><button onClick={handleAddMessage}>Send message</button></div>
+    <div className={styles.buttonWrapper}><button onClick={onAddMessage}>Send message</button></div>
     </>
     )
 }

@@ -9,16 +9,16 @@ import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 
 
-const App = ({state, store}) => {
+const App = ({store}) => {
 
   return (<div className="app-wrapper">
     <BrowserRouter>
    <Header />
-   <Sidebar friendsBlock={state.friendsBlock} />
+   <Sidebar friendsBlock={store.getState().friendsBlock} />
    <div className="app-wrapper-content">
      
-     <Route path="/dialogs" ><Dialogs dialogsPage={state.dialogsPage} dispatch={store.dispatch.bind(store)} /></Route>
-     <Route path="/profile"><Profile profilePage={state.profilePage} dispatch={store.dispatch.bind(store)} /> </Route>
+     <Route path="/dialogs" ><Dialogs store={store} /></Route>
+     <Route path="/profile"><Profile store={store} /> </Route>
      <Route path="/music" component={Music} />
      <Route path="/news" component={News} />
      <Route path="/settings" component={Settings} />

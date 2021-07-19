@@ -28,7 +28,6 @@ export const profilePageReducer = (state = initialState, action) => {
         break;
       
           case CHANGE_POST: 
-          debugger;
           state.postMessage = action.post;
           break;
           default:

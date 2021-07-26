@@ -1,35 +1,29 @@
 import React from 'react';
 import styles from "./Dialogs.module.css";
-import Dialog from "./Dialog/Dialog";
-import Message from "./Message/Message";
-import MessageInputFieldContainer from "./Message/MessageInputField/MessageInputFieldContainer";
+import MessagesContainer from "./Messages/MessagesContainer";
+import UsersContainer from "./Users/UsersContainer";
+import MessageInputFieldContainer from "./Messages/Message/MessageInputField/MessageInputFieldContainer";
 
-
-const Dialogs = ({store}) => {
-    
-
-    const dialogsElements = store.getState().dialogsPage.dialogs.map(d => <Dialog name={d.name} id={d.id} photo={d.photo}/>);
-    const messagesElements = store.getState().dialogsPage.messages.map(m => <Message message={m.message} type={m.type}/>);
-
-
-    return (
+const Dialogs = () => {
+            return (
         <div className={styles.dialogs}>
             <div className={styles.dialogsItems}>
-               { dialogsElements }
+                
+               <UsersContainer />
                                            </div>
         <div>
         <div className={styles.messagesBoard}>
             <div className={styles.messages}>
-            { messagesElements }
+            <MessagesContainer />
             </div>
-        <MessageInputFieldContainer store={store} />
+        <MessageInputFieldContainer />
 
         </div>
-        
         </div>
-        
-
         </div>
-    )
+        )
+        
+        
+    
 }
 export default Dialogs;  

@@ -17,7 +17,7 @@ const initialState = {
     {id: 3, message: 'I\'m okay', type: 'in'}
   ],
   currentMessage: '',
-  dialogs: [
+  users: [
     {id: 1, name: 'Artur', photo: 'https://randomuser.me/api/portraits/men/61.jpg' },
     {id: 2, name: 'Ivan', photo: 'https://randomuser.me/api/portraits/women/89.jpg' },
     {id: 3, name: 'Piotr', photo: 'https://randomuser.me/api/portraits/women/47.jpg' },
@@ -27,22 +27,26 @@ const initialState = {
 
 };
 export const dialogsPageReducer = (state = initialState, action) => {
+  let stateCopy = {...state};
     switch (action.type) {
           case ADD_MESSAGE: 
+          if(state.currentMessage !== '')  {
           const newMessage = {
             id: state.messages.length + 1, message: state.currentMessage, type: action.direction
           }
-          state.messages.push(newMessage);
-          state.currentMessage = '';
-          break;
+          stateCopy.messages = [...state.messages];
+          stateCopy.messages.push(newMessage);
+          stateCopy.currentMessage = '';
+        }
+          return stateCopy;
       
-            case CHANGE_MESSAGE: 
-            state.currentMessage = action.message;
-            break;
+          case CHANGE_MESSAGE: 
+          stateCopy.currentMessage = action.message;
+          return stateCopy;
       
         default:
-          break;
+          return state;
       }
-    return state;
+    
 
 }

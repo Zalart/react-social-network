@@ -1,12 +1,12 @@
-.dialog {
+.user {
 }
-.dialog img {
-    width: 50px;
+.user img {
+    width: 60px;
     border-radius: 50%;
     margin-right: 5px;
 }
 
- a.dialog {
+ a.user {
     text-decoration: none;
     color:darkslategrey;
     display: flex;

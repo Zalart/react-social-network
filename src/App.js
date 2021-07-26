@@ -7,9 +7,10 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
+import store from './redux/redux-store';
 
 
-const App = ({store}) => {
+const App = () => {
 
   return (<div className="app-wrapper">
     <BrowserRouter>
@@ -17,8 +18,8 @@ const App = ({store}) => {
    <Sidebar friendsBlock={store.getState().friendsBlock} />
    <div className="app-wrapper-content">
      
-     <Route path="/dialogs" ><Dialogs store={store} /></Route>
-     <Route path="/profile"><Profile store={store} /> </Route>
+     <Route path="/dialogs" ><Dialogs /></Route>
+     <Route path="/profile"><Profile /> </Route>
      <Route path="/music" component={Music} />
      <Route path="/news" component={News} />
      <Route path="/settings" component={Settings} />

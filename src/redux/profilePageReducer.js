@@ -7,7 +7,7 @@ let initialState =  {
   {id: 2, likes: 100, message: 'It\'s my first post'},
   {id: 3, likes: 0, message: 'New message from props'}
 ],
-postMessage: ''
+  postMessage: ''
 }
 
 export const addPostActionCreator = () => ({ type: ADD_POST });
@@ -15,9 +15,7 @@ export const addPostActionCreator = () => ({ type: ADD_POST });
 export const changeNewPostTextActionCreator = (post) => ({type: CHANGE_POST, post: post});
 
 
-export const profilePageReducer = (state = initialState, action) => {
-  let stateCopy = {...state}
-  
+export const profilePageReducer = (state = initialState, action) => {  
     switch (action.type) {
         case ADD_POST: 
         const newPost = {
@@ -25,15 +23,17 @@ export const profilePageReducer = (state = initialState, action) => {
           likes: 0, 
           message: state.postMessage
         }
-        stateCopy.posts = [...state.posts];
-        stateCopy.posts.push(newPost);
-        stateCopy.postMessage = '';
-        return stateCopy;
+        return {
+          ...state,
+          posts: [...state.posts, newPost],
+          postMessage: ''
+        } 
       
         case CHANGE_POST: 
-        stateCopy.postMessage = action.post;
-        return stateCopy;
-        
+        return {
+          ...state,
+          postMessage: action.post
+        }        
         default:
           return state;
         

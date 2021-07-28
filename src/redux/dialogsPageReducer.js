@@ -27,22 +27,28 @@ const initialState = {
 
 };
 export const dialogsPageReducer = (state = initialState, action) => {
-  let stateCopy = {...state};
+  
     switch (action.type) {
           case ADD_MESSAGE: 
           if(state.currentMessage !== '')  {
           const newMessage = {
             id: state.messages.length + 1, message: state.currentMessage, type: action.direction
           }
-          stateCopy.messages = [...state.messages];
-          stateCopy.messages.push(newMessage);
-          stateCopy.currentMessage = '';
+        
+          return {
+            ...state,
+            messages: [...state.messages, newMessage],
+            currentMessage: ''
+          } 
+        } else {
+          return state
         }
-          return stateCopy;
-      
+
           case CHANGE_MESSAGE: 
-          stateCopy.currentMessage = action.message;
-          return stateCopy;
+          return {
+            ...state,
+           currentMessage: action.message
+          }
       
         default:
           return state;

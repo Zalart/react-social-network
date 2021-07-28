@@ -7,6 +7,7 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
+import MembersContainer from './components/Members/MembersContainer';
 import store from './redux/redux-store';
 
 
@@ -20,6 +21,7 @@ const App = () => {
      
      <Route path="/dialogs" ><Dialogs /></Route>
      <Route path="/profile"><Profile /> </Route>
+     <Route path="/members"><MembersContainer /></Route>
      <Route path="/music" component={Music} />
      <Route path="/news" component={News} />
      <Route path="/settings" component={Settings} />

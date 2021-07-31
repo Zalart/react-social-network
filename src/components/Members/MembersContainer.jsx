@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import Members from './Members';
-import {followHandlerAC, setPageAC, setMembersAC, setTotalMembersCountAC, isLoadingHandlerAC} from '../../redux/membersPageReducer';
+import {followMember, setPage, setMembers, setTotalMembersCount, setIsLoading} from '../../redux/membersPageReducer';
 
 
 class MembersContainer extends React.Component {
@@ -61,25 +61,32 @@ let mapStateToProps = (state) => {
 
 }
 
-let mapDispatchToProps = (dispatch) => {
+/* let mapDispatchToProps = (dispatch) => {
     return {
         followMember: (memberId) => {
-            dispatch(followHandlerAC(memberId))
+            dispatch(followMember(memberId))
         },
         setMembers: (members, totalMembersCount) => {
-            dispatch(setMembersAC(members, totalMembersCount))
+            dispatch(setMembers(members, totalMembersCount))
         }, 
         setPage: (targetPage) => {
-            dispatch(setPageAC(targetPage))
+            dispatch(setPage(targetPage))
         },
         setTotalMembersCount: (totalMembersCount) => {
-            dispatch(setTotalMembersCountAC(totalMembersCount))
+            dispatch(setTotalMembersCount(totalMembersCount))
     },
         setIsLoading: (status) => {
-            dispatch(isLoadingHandlerAC(status))
+            dispatch(setIsLoading(status))
         }
 }
-};
+}; */
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(MembersContainer);
+export default connect(mapStateToProps,
+    {
+        followMember,
+        setMembers,
+        setPage,
+        setTotalMembersCount,
+        setIsLoading
+    })(MembersContainer);

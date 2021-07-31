@@ -1,82 +1,39 @@
-import axios from 'axios';
 import React from 'react';
 import styles from './Members.module.css';
 import noPhoto from '../../assets/images/user.svg'
+import Preloader from '../common/Preloader/Preloader';
 
+const Members = (props) => {
+    let pagesQuantity = Math.ceil(props.totalMembersCount / props.pageSize);
 
-class Members extends React.Component {
-/*     constructor(props){
-        super(props);
-    } */
-    componentDidMount(){
+    let pages = [];
 
-        /*  if (this.props.members.length === 0) { */
-             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&${this.props.pageSize}`)
-             .then(response => 
-                 {
-                     this.props.setMembers(response.data.items);
-                     this.props.setTotalMembersCount(response.data.totalCount);
-                 });
-                 //setTimeout(()=> alert('Timeout in didMount'), 3000)
+    for (let i = 1; i <= pagesQuantity; i++ )
+    {
+        pages.push(i);
     }
-
-    onPageChanged = (pageNumber) => {
-        this.props.setPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&${this.props.pageSize}`)
-        .then(response => 
-            {
-                this.props.setMembers(response.data.items);
-                
-            });
-    }
-
-   /*  componentDidUpdate(){
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&${this.props.pageSize}`)
-        .then(response => 
-            {
-                this.props.setMembers(response.data.items);
-                this.props.setTotalMembersCount(response.data.totalCount);
-            });
-      
-    } */
-
-    componentWillUnmount(){
-
-    
-    }
-
-    render() {
-        let pagesQuantity = Math.ceil(this.props.totalMembersCount / this.props.pageSize);
-
-        let pages = [];
-
-        for (let i = 1; i <= pagesQuantity; i++ )
-        {
-            pages.push(i);
-        }
     return <div> 
-<div>
-    {pages.map((p) => <span id={p} key={p} onClick={() => {this.onPageChanged(p)}} className={this.props.currentPage === p ? styles.selected : undefined}>{p}</span>)}
-</div>
-        {this.props.members.map(m => <div className={styles.members} key={m.id}>
-        <span>
-            <div className={styles.member}><img src={m.photos.large ? m.photos.large : noPhoto } alt={m.name}/></div>
         <div>
-            <button id={m.id} onClick={() => this.props.followMember(m.id)} >
-            {m.followed ? 'Unfollow' : 'Follow'}
-            </button>
-            </div>
-        </span>
-        <span><div>{m.name}</div>
-        <div>Studying</div></span>
-
-        <span><div>Минск</div><div>Беларусь</div></span>
-        </div>)} 
-        <div>{this.props.totalMembersCount}</div>
-        <div>{pagesQuantity}</div>
-        </div> 
-}
-
-}
+            {pages.map((p) => <span id={p} key={p} onClick={() => {props.onPageChanged(p)}} className={props.currentPage === p ? styles.selected : undefined}>{p}</span>)}
+        </div>
+       
+                {props.isLoading ? <Preloader /> : props.members.map(m => <div className={styles.members} key={m.id}>
+                <span>
+                    <div className={styles.member}><img src={m.photos.large ? m.photos.large : noPhoto } alt={m.name}/></div>
+                <div>
+                    <button id={m.id} onClick={() => props.followMember(m.id)} >
+                    {m.followed ? 'Unfollow' : 'Follow'}
+                    </button>
+                    </div>
+                </span>
+                <span><div>{m.name}</div>
+                <div>Studying</div></span>
+        
+                <span><div>Минск</div><div>Беларусь</div></span>
+                </div>)} 
+{/*                 <div>{props.totalMembersCount}</div>
+                <div>{pagesQuantity}</div> */}
+                </div> 
+    }
 
 export default Members;

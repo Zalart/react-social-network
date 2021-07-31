@@ -3,13 +3,15 @@ const LOAD_MORE = 'LOAD-MORE';
 const SET_MEMBERS = 'SET-MEMBERS';
 const SET_PAGE = 'SET-PAGE';
 const SET_TOTAL_MEMBERS_COUNT = 'SET_TOTAL_MEMBERS_COUNT';
+const IS_LOADING = 'IS_LOADING';
 
 
 let initialState = {
     members: [],
     pageSize: 5,
     totalMembersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isLoading: false
 }
 export const membersPageReducer = (state = initialState, action) => {
 
@@ -45,7 +47,6 @@ export const membersPageReducer = (state = initialState, action) => {
             }
         }
         case SET_PAGE: {
-debugger
             return {
                 ...state,
                 currentPage: action.targetPage
@@ -53,6 +54,12 @@ debugger
         }
         case LOAD_MORE: {
             return 'load more'
+        }
+        case IS_LOADING: {
+            return {
+                ...state,
+                isLoading: action.status
+            }
         }
         default: {
             return state
@@ -63,6 +70,7 @@ debugger
 
 export const followHandlerAC = (memberId) => ({type: FOLLOW_HANDLER, memberId});
 export const loadMoreMembersAC = () => ({type: LOAD_MORE});
-export const setMembersAC = (members, totalMembersCount) => ({type: SET_MEMBERS, members});
+export const setMembersAC = (members) => ({type: SET_MEMBERS, members});
 export const setPageAC = (targetPage) => ({type: SET_PAGE, targetPage});
-export const setTotalMembersCountAC = (totalMembersCount) => ({type: SET_TOTAL_MEMBERS_COUNT, totalMembersCount})
+export const setTotalMembersCountAC = (totalMembersCount) => ({type: SET_TOTAL_MEMBERS_COUNT, totalMembersCount});
+export const isLoadingHandlerAC = (status) => ({type: IS_LOADING, status});

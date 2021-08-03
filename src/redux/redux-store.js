@@ -3,11 +3,13 @@ import { profilePageReducer } from "./profilePageReducer";
 import { dialogsPageReducer } from "./dialogsPageReducer";
 import { friendsBlockReducer } from "./friendsBlockReducer";
 import { membersPageReducer } from "./membersPageReducer";
+import { authReducer } from "./authReducer";
 let reducersBatch = combineReducers({
     profilePage: profilePageReducer,
     dialogsPage: dialogsPageReducer,
     friendsBlock: friendsBlockReducer,
-    membersPage: membersPageReducer
+    membersPage: membersPageReducer,
+    auth: authReducer
 
 });
 

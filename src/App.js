@@ -1,6 +1,5 @@
 import './App.css';
 import {Route, BrowserRouter} from 'react-router-dom';
-import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import Dialogs from './components/Dialogs/Dialogs';
@@ -9,13 +8,14 @@ import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import MembersContainer from './components/Members/MembersContainer';
 import store from './redux/redux-store';
+import HeaderContainer from './components/Header/HeaderContainer';
 
 
 const App = () => {
 
   return (<div className="app-wrapper">
     <BrowserRouter>
-   <Header />
+   <HeaderContainer />
    <Sidebar friendsBlock={store.getState().friendsBlock} />
    <div className="app-wrapper-content">
      

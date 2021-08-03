@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Members.module.css';
 import noPhoto from '../../assets/images/user.svg'
 import Preloader from '../common/Preloader/Preloader';
+import { NavLink } from 'react-router-dom';
 
 const Members = (props) => {
     let pagesQuantity = Math.ceil(props.totalMembersCount / props.pageSize);
@@ -19,7 +20,7 @@ const Members = (props) => {
        
                 {props.isLoading ? <Preloader /> : props.members.map(m => <div className={styles.members} key={m.id}>
                 <span>
-                    <div className={styles.member}><img src={m.photos.large ? m.photos.large : noPhoto } alt={m.name}/></div>
+                    <div className={styles.member}><NavLink to={'/profile/' + m.id}><img src={m.photos.large ? m.photos.large : noPhoto } alt={m.name}/></NavLink></div>
                 <div>
                     <button id={m.id} onClick={() => props.followMember(m.id)} >
                     {m.followed ? 'Unfollow' : 'Follow'}

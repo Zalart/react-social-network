@@ -1,3 +1,17 @@
-.descriptionBlock {
+.profile {
     padding: 10px;
+}
+.fullName {
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+.profileMain {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.2em;
+}
+.photo {
+    width: 250px;
+    border-radius: 50%;
 }

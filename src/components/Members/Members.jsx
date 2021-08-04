@@ -3,6 +3,7 @@ import styles from './Members.module.css';
 import noPhoto from '../../assets/images/user.svg'
 import Preloader from '../common/Preloader/Preloader';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 const Members = (props) => {
     let pagesQuantity = Math.ceil(props.totalMembersCount / props.pageSize);
@@ -22,7 +23,34 @@ const Members = (props) => {
                 <span>
                     <div className={styles.member}><NavLink to={'/profile/' + m.id}><img src={m.photos.large ? m.photos.large : noPhoto } alt={m.name}/></NavLink></div>
                 <div>
-                    <button id={m.id} onClick={() => props.followMember(m.id)} >
+                    <button id={m.id} onClick={() => {
+                        m.followed ?
+                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`, {withCredentials: true,
+                                headers: {
+                                    "API-KEY": "b55c9dc7-fb66-4d82-a5cf-50a73f5d33a0"
+                                }
+                            })
+                            .then(response => {
+                                if(response.data.resultCode === 0) {
+                                    props.followMember(m.id);
+                                }
+                                })
+                         :
+                         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`, {}, {
+                            withCredentials: true,
+                            headers: {
+                                "API-KEY": "b55c9dc7-fb66-4d82-a5cf-50a73f5d33a0"
+                                } 
+                            })
+                    .then(response => {
+                        if(response.data.resultCode === 0) {
+                            props.followMember(m.id);
+                        }
+                        })
+
+                }
+            }
+                    >
                     {m.followed ? 'Unfollow' : 'Follow'}
                     </button>
                     </div>

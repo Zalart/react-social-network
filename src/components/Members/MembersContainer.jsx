@@ -9,7 +9,7 @@ class MembersContainer extends React.Component {
 
     componentDidMount(){
             this.props.setIsLoading(true);
-             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&${this.props.pageSize}`)
+             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&${this.props.pageSize}`, {withCredentials: true})
              .then(response => 
                  {
                      this.props.setMembers(response.data.items);
@@ -22,7 +22,7 @@ class MembersContainer extends React.Component {
     onPageChanged = (pageNumber) => {
         this.props.setPage(pageNumber);
         this.props.setIsLoading(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&${this.props.pageSize}`, {withCredentials: true})
         .then(response => 
             {
                 this.props.setMembers(response.data.items);

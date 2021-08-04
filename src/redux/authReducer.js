@@ -27,7 +27,6 @@ export const authReducer = (state = initialState, action) => {
           isAuthorised: true
         }
         case SET_CURRENT_USER_PROFILE_DATA: 
-        debugger
         return {
           ...state,
           userData: action.userData

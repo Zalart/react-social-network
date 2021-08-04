@@ -1,19 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import axios from 'axios';
 import Members from './Members';
 import {followMember, setPage, setMembers, setTotalMembersCount, setIsLoading} from '../../redux/membersPageReducer';
+import { membersApi } from '../../api/api';
 
 
 class MembersContainer extends React.Component {
 
     componentDidMount(){
             this.props.setIsLoading(true);
-             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&${this.props.pageSize}`, {withCredentials: true})
+            membersApi.getMembers(this.props.currentPage, this.props.pageSize)
              .then(response => 
                  {
-                     this.props.setMembers(response.data.items);
-                     this.props.setTotalMembersCount(response.data.totalCount);
+                     this.props.setMembers(response.items);
+                     this.props.setTotalMembersCount(response.totalCount);
                      this.props.setIsLoading(false);
                  });
                  
@@ -22,10 +22,10 @@ class MembersContainer extends React.Component {
     onPageChanged = (pageNumber) => {
         this.props.setPage(pageNumber);
         this.props.setIsLoading(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&${this.props.pageSize}`, {withCredentials: true})
+        membersApi.getMembers(pageNumber, this.props.pageSize)
         .then(response => 
             {
-                this.props.setMembers(response.data.items);
+                this.props.setMembers(response.items);
                 this.props.setIsLoading(false);
                 
             });

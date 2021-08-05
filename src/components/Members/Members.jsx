@@ -22,8 +22,7 @@ const Members = (props) => {
                 <span>
                     <div className={styles.member}><NavLink to={'/profile/' + m.id}><img src={m.photos.large ? m.photos.large : noPhoto } alt={m.name}/></NavLink></div>
                 <div>
-                    <button disabled={props.followingProgress === m.id && true } id={m.id} onClick={() => {
-                        console.log(props.followingProgress)
+                    <button disabled={props.followingProgress.some(id => id === m.id)} id={m.id} onClick={() => {
                         props.toggleFollowingProgress(m.id, true);
                         membersApi.followMember(m.id, m.followed)
                         .then(response => {

@@ -13,7 +13,7 @@ let initialState = {
     totalMembersCount: 0,
     currentPage: 1,
     isLoading: false,
-    followingProgress: 0
+    followingProgress: []
 }
 export const membersPageReducer = (state = initialState, action) => {
 
@@ -39,12 +39,12 @@ export const membersPageReducer = (state = initialState, action) => {
             if (action.status) {
             return {
                 ...state,
-                followingProgress: action.id
+                followingProgress: [...state.followingProgress, action.id]
             }
         } else {
             return {
                 ...state,
-                followingProgress: 0
+                followingProgress: state.followingProgress.filter(id => id !== action.id)
             }
         }
         }

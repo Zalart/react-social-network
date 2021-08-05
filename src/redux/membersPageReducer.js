@@ -4,6 +4,7 @@ const SET_MEMBERS = 'SET_MEMBERS';
 const SET_PAGE = 'SET_PAGE';
 const SET_TOTAL_MEMBERS_COUNT = 'SET_TOTAL_MEMBERS_COUNT';
 const IS_LOADING = 'IS_LOADING';
+const FOLLOWING_PROGRESS = 'FOLLOWING_PROGRESS';
 
 
 let initialState = {
@@ -11,7 +12,8 @@ let initialState = {
     pageSize: 5,
     totalMembersCount: 0,
     currentPage: 1,
-    isLoading: false
+    isLoading: false,
+    followingProgress: 0
 }
 export const membersPageReducer = (state = initialState, action) => {
 
@@ -32,6 +34,19 @@ export const membersPageReducer = (state = initialState, action) => {
                 )
             }
 
+        }
+        case FOLLOWING_PROGRESS: {
+            if (action.status) {
+            return {
+                ...state,
+                followingProgress: action.id
+            }
+        } else {
+            return {
+                ...state,
+                followingProgress: 0
+            }
+        }
         }
         case SET_MEMBERS: {
 
@@ -74,3 +89,4 @@ export const setMembers = (members) => ({type: SET_MEMBERS, members});
 export const setPage = (targetPage) => ({type: SET_PAGE, targetPage});
 export const setTotalMembersCount = (totalMembersCount) => ({type: SET_TOTAL_MEMBERS_COUNT, totalMembersCount});
 export const setIsLoading = (status) => ({type: IS_LOADING, status});
+export const toggleFollowingProgress = (id, status) => ({type: FOLLOWING_PROGRESS, id, status});

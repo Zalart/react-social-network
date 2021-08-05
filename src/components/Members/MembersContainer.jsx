@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Members from './Members';
-import {followMember, setPage, setMembers, setTotalMembersCount, setIsLoading} from '../../redux/membersPageReducer';
+import {followMember, setPage, setMembers, setTotalMembersCount, setIsLoading, toggleFollowingProgress} from '../../redux/membersPageReducer';
 import { membersApi } from '../../api/api';
 
 
@@ -42,7 +42,8 @@ class MembersContainer extends React.Component {
         }
     return <Members members={this.props.members} totalMembersCount={this.props.totalMembersCount}
     pageSize={this.props.pageSize} currentPage={this.props.currentPage}
-    followMember={this.props.followMember} onPageChanged={this.onPageChanged} isLoading={this.props.isLoading}
+    followMember={this.props.followMember} onPageChanged={this.onPageChanged} isLoading={this.props.isLoading} followingProgress={this.props.followingProgress}
+    toggleFollowingProgress={this.props.toggleFollowingProgress}
      />
 }
 
@@ -56,7 +57,8 @@ let mapStateToProps = (state) => {
         pageSize: state.membersPage.pageSize,
         totalMembersCount: state.membersPage.totalMembersCount,
         currentPage: state.membersPage.currentPage,
-        isLoading: state.membersPage.isLoading
+        isLoading: state.membersPage.isLoading,
+        followingProgress: state.membersPage.followingProgress
     }
 
 }
@@ -88,5 +90,6 @@ export default connect(mapStateToProps,
         setMembers,
         setPage,
         setTotalMembersCount,
-        setIsLoading
+        setIsLoading,
+        toggleFollowingProgress
     })(MembersContainer);

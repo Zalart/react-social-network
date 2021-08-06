@@ -37,7 +37,6 @@ const App = () => {
         </div>
       </BrowserRouter>
     </div>
-    // nice idea to implement
   );
 };
 

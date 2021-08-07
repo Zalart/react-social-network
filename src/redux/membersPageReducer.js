@@ -1,3 +1,4 @@
+import {membersApi} from '../api/api';
 const FOLLOW_MEMBER = 'FOLLOW_MEMBER';
 const LOAD_MORE = 'LOAD_MORE';
 const SET_MEMBERS = 'SET_MEMBERS';
@@ -90,3 +91,30 @@ export const setPage = (targetPage) => ({type: SET_PAGE, targetPage});
 export const setTotalMembersCount = (totalMembersCount) => ({type: SET_TOTAL_MEMBERS_COUNT, totalMembersCount});
 export const setIsLoading = (status) => ({type: IS_LOADING, status});
 export const toggleFollowingProgress = (id, status) => ({type: FOLLOWING_PROGRESS, id, status});
+
+//Thunks
+
+export const getMembers = (currentPage, pageSize) => dispatch => {
+
+    dispatch(setIsLoading(true));
+    dispatch(setPage(currentPage));
+    membersApi.getMembers(currentPage, pageSize)
+             .then(response => 
+                 {
+                    dispatch(setMembers(response.items));
+                    dispatch(setTotalMembersCount(response.totalCount));
+                    dispatch(setIsLoading(false));
+                 })
+}
+
+export const toggleFollow = (userId, status) => dispatch => {
+
+    dispatch(toggleFollowingProgress(userId, true));
+    membersApi.followMember(userId, status)
+    .then(response => {
+            if(response.resultCode === 0) {
+                dispatch(followMember(userId));
+            }
+            dispatch(toggleFollowingProgress(userId, false));
+            })
+}

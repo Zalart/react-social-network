@@ -1,9 +1,10 @@
-import { combineReducers, createStore } from "redux";
+import { combineReducers, createStore, applyMiddleware } from "redux";
 import { profilePageReducer } from "./profilePageReducer";
 import { dialogsPageReducer } from "./dialogsPageReducer";
 import { friendsBlockReducer } from "./friendsBlockReducer";
 import { membersPageReducer } from "./membersPageReducer";
 import { authReducer } from "./authReducer";
+import thunkMiddleware from "redux-thunk";
 let reducersBatch = combineReducers({
     profilePage: profilePageReducer,
     dialogsPage: dialogsPageReducer,
@@ -13,7 +14,7 @@ let reducersBatch = combineReducers({
 
 });
 
-let store = createStore(reducersBatch);
+let store = createStore(reducersBatch, applyMiddleware(thunkMiddleware));
 
 window.store = store;
 

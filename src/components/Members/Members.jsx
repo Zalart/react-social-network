@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Members.module.css';
 import noPhoto from '../../assets/images/user.svg'
 import { NavLink } from 'react-router-dom';
-import { membersApi } from '../../api/api';
 
 const Members = (props) => {
     let pagesQuantity = Math.ceil(props.totalMembersCount / props.pageSize);
@@ -23,14 +22,7 @@ const Members = (props) => {
                     <div className={styles.member}><NavLink to={'/profile/' + m.id}><img src={m.photos.large ? m.photos.large : noPhoto } alt={m.name}/></NavLink></div>
                 <div>
                     <button disabled={props.followingProgress.some(id => id === m.id)} id={m.id} onClick={() => {
-                        props.toggleFollowingProgress(m.id, true);
-                        membersApi.followMember(m.id, m.followed)
-                        .then(response => {
-                                if(response.resultCode === 0) {
-                                    props.followMember(m.id);
-                                }
-                                props.toggleFollowingProgress(m.id, false);
-                                })
+                        props.toggleFollow(m.id, m.followed);
                 }
             }
                     >

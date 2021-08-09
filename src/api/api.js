@@ -27,15 +27,13 @@ export const membersApi = {
 
 export const authApi = {
     getAuth() {
-        return instance.get(`auth/me`)
-        .then(response => response.data)
+        return instance.get(`auth/me`);
     }
 }
 
 export const profileApi = {
     getProfile(id) {
         return instance.get(`profile/${id}`)
-        .then(response => response.data)
     }
 }
 

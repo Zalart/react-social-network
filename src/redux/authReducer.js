@@ -1,3 +1,4 @@
+import {authApi, profileApi} from '../api/api';
 export const SET_AUTH_DATA = 'SET_AUTH_DATA';
 export const SET_CURRENT_USER_PROFILE_DATA = 'SET_CURRENT_USER_PROFILE_DATA';
 // We can only check auth status yet, so we setting auth status into redux state
@@ -35,5 +36,30 @@ export const authReducer = (state = initialState, action) => {
           return state;
         
 }
+
+}
+
+// Thunks
+
+export const getAuth = () => dispatch => {
+
+  authApi.getAuth()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+              
+                let {id, login, email} = response.data.data;
+                dispatch(setAuthData(id, login, email));
+                
+                
+                profileApi.getProfile(id)
+                
+                .then(data => {
+                
+                    dispatch(setCurrentUserProfileData(data.data));
+                })
+        
+            }
+            
+        })
 
 }

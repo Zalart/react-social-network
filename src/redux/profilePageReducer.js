@@ -1,3 +1,4 @@
+import {profileApi} from '../api/api';
 export const ADD_POST = 'ADD-POST';
 export const CHANGE_POST = 'CHANGE-POST';
 export const SET_PROFILE = 'SET_PROFILE';
@@ -49,5 +50,16 @@ export const profilePageReducer = (state = initialState, action) => {
           return state;
         
 }
+
+}
+
+//Thunks
+
+export const getProfile = (userId) => dispatch => {
+
+  profileApi.getProfile(userId)
+  .then(response => {
+     dispatch(setProfile(response.data));
+  })
 
 }

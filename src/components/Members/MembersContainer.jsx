@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Members from './Members';
 import {getMembers, toggleFollow} from '../../redux/membersPageReducer';
+import { withAuthRedirect } from '../hoc/withAuthRedirect';
 
 
 class MembersContainer extends React.Component {
@@ -50,9 +51,10 @@ let mapStateToProps = (state) => {
     }
 
 }
+let isAuthMembersContainer = withAuthRedirect(MembersContainer);
 
 export default connect(mapStateToProps,
     {
         getMembers,
         toggleFollow
-    })(MembersContainer);
+    })(isAuthMembersContainer);

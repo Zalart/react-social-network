@@ -6,10 +6,12 @@ import {getAuth} from "../../redux/authReducer";
 class HeaderContainer extends React.Component {
 
     componentDidMount(){
+        
         this.props.getAuth();
-    }
-render(){
 
+    }
+
+render(){
     return <Header {...this.props} />;
 }
 }

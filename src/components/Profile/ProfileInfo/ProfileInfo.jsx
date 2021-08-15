@@ -1,8 +1,9 @@
 import styles from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader"
 import {Link} from "react-router-dom";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
-const ProfileInfo = ({profile}) => {
+const ProfileInfo = ({profile, profileStatus, updateProfileStatus}) => {
   if (!profile) {
     return <Preloader />
   }
@@ -21,6 +22,7 @@ const ProfileInfo = ({profile}) => {
       Main info: {profile.aboutMe}<br/>
       </div>
       </div> 
+      <div><ProfileStatus profileStatus={profileStatus} updateProfileStatus={updateProfileStatus}/></div>
       </div>
     )
 }

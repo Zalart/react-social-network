@@ -46,10 +46,9 @@ export const getAuth = () => dispatch => {
   authApi.getAuth()
         .then(response => {
             if (response.data.resultCode === 0) {
-              
+
                 let {id, login, email} = response.data.data;
                 dispatch(setAuthData(id, login, email));
-                
                 
                 profileApi.getProfile(id)
                 

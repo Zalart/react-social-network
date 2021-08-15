@@ -54,9 +54,8 @@ let mapStateToProps = (state) => {
 }
 
 
-export default compose(connect(mapStateToProps,
+export default compose(withAuthRedirect, connect(mapStateToProps,
     {
         getMembers,
         toggleFollow
-    }),
-    withAuthRedirect)(MembersContainer);
+    }))(MembersContainer);

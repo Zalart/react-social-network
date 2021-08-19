@@ -28,7 +28,14 @@ export const membersApi = {
 export const authApi = {
     getAuth() {
         return instance.get(`auth/me`);
+    },
+    logIn(loginCredentials){
+        return instance.post(`auth/login`, loginCredentials);
+    },
+    logOut(){
+        return instance.delete(`auth/login`);
     }
+
 }
 
 export const profileApi = {

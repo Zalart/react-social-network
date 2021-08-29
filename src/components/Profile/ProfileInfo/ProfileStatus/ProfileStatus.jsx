@@ -14,10 +14,6 @@ componentDidMount(){
     componentDidUpdate(prevProps, prevState){
         console.log('component updated', prevProps.profileStatus, this.props.profileStatus)
         if (prevProps.profileStatus !== this.props.profileStatus){
-            console.log('here')
-/*     this.setState({
-        status: this.props.profileStatus
-    }) */
 }
     }
 

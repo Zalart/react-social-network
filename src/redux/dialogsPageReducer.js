@@ -1,13 +1,10 @@
 export const ADD_MESSAGE = 'ADD-MESSAGE';
-export const CHANGE_MESSAGE = 'CHANGE-MESSAGE';
 
-export const addMessageActionCreator = ()=> {
+export const addMessageActionCreator = (newMessage)=> {
   const direction = Math.random() >= 0.5 ? 'out' : 'in';
- return {type: ADD_MESSAGE, direction: direction}
+ return {type: ADD_MESSAGE, direction, newMessage}
 
 }
-
-export const changeNewMessageActionCreator = (message) => ({type: CHANGE_MESSAGE, message: message});
 
 const initialState = {
     
@@ -16,7 +13,6 @@ const initialState = {
     {id: 2, message: 'Do you feel good?', type: 'out'},
     {id: 3, message: 'I\'m okay', type: 'in'}
   ],
-  currentMessage: '',
   users: [
     {id: 1, name: 'Artur', photo: 'https://randomuser.me/api/portraits/men/61.jpg' },
     {id: 2, name: 'Ivan', photo: 'https://randomuser.me/api/portraits/women/89.jpg' },
@@ -27,28 +23,22 @@ const initialState = {
 
 };
 export const dialogsPageReducer = (state = initialState, action) => {
+
   
     switch (action.type) {
           case ADD_MESSAGE: 
-          if(state.currentMessage !== '')  {
+/*           if(state.currentMessage !== '')  { */
           const newMessage = {
-            id: state.messages.length + 1, message: state.currentMessage, type: action.direction
+            id: state.messages.length + 1, message: action.newMessage, type: action.direction
           }
         
           return {
             ...state,
-            messages: [...state.messages, newMessage],
-            currentMessage: ''
+            messages: [...state.messages, newMessage]
           } 
-        } else {
+/*         } else {
           return state
-        }
-
-          case CHANGE_MESSAGE: 
-          return {
-            ...state,
-           currentMessage: action.message
-          }
+        } */
       
         default:
           return state;

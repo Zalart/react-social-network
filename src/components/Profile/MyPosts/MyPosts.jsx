@@ -1,28 +1,19 @@
 import React from 'react';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import AddPostForm from './AddPostForm/AddPostForm';
 
-const MyPosts = ({posts, currentPost, addPost, updateNewPostText}) => {
+const MyPosts = ({posts, addPost}) => {
 
   const postsElements = posts.map(post => (<Post key={post.message} message={post.message} likes={post.likes} />));
 
-  let newPostElement = React.createRef();
-
-  const handleAddPost = () => {
-    addPost();
-  }
-  const handleChangePost = () => {
-    let text = newPostElement.current.value;
-    updateNewPostText(text);
+  const handleAddPost = (values) => {
+    addPost(values.newPost);
   }
     return (  
       <div className={styles.postsBlock}>
         <h2>MY POSTS</h2>
-        <div>
-          <div><textarea ref={newPostElement} onChange={handleChangePost} value={currentPost}></textarea></div>
-          <button onClick={handleAddPost}>Add post</button>
-        <button>Remove</button></div>
-      
+        <AddPostForm onSubmit={handleAddPost} />
       <div className={styles.posts}>
        <h4>New posts</h4> 
  

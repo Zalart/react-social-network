@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./Dialogs.module.css";
 import MessagesContainer from "./Messages/MessagesContainer";
 import UsersContainer from "./Users/UsersContainer";
-import MessageInputFieldContainer from "./Messages/Message/MessageInputField/MessageInputFieldContainer";
+import MessageInputFieldContainer from "./MessageInputField/MessageInputFieldContainer";
 
 const Dialogs = () => {
     

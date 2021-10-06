@@ -1,5 +1,5 @@
 .addMessage {
-    text-align: end;
+    /*text-align: end; */
     border-top: 1px solid gainsboro;
 }
 .addMessage textarea {
